@@ -42,6 +42,8 @@ public class User {
 
     private UserStatus userStatus;
 
+    private String phoneNumber;
+
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
 

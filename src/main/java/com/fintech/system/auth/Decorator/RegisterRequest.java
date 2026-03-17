@@ -1,5 +1,6 @@
 package com.fintech.system.auth.Decorator;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -15,9 +16,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegisterRequest {
 
+    @JsonProperty("fName")
     @NotBlank(message = "First name is required")
     private String fName;
 
+    @JsonProperty("lName")
     @NotBlank(message = "Last name is required")
     private String lName;
 
@@ -29,7 +32,7 @@ public class RegisterRequest {
     @Size(min = 8, message = "Password must be at least 8 characters")
     private String password;
 
-    @NotBlank(message = "Phone number is required")
+//    @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid phone number")
     private String phoneNumber;
 }

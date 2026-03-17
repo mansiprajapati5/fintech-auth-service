@@ -31,31 +31,36 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // 1. Precise paths for Swagger & OpenAPI
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/v3/api-docs.yaml",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/oauth2/**",
+                                "/login/oauth2/**",
+                                "/api/auth/oauth2/**"
                         ).permitAll()
-
-                        // only these specific endpoints are public
                         .requestMatchers(HttpMethod.POST, "/api/auth/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/users/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/auth/users/verify-email/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/auth/users").hasRole("ADMIN")  // only admin can get all users
-                        .requestMatchers(HttpMethod.DELETE, "/api/auth/users/**").hasRole("ADMIN")  // only admin can delete
-                        .requestMatchers(HttpMethod.GET, "/api/auth/users/{id}").hasAnyRole("ADMIN", "USER")  // both can get by id
-                        // everything else requires JWT
+                        .requestMatchers(HttpMethod.GET, "/api/auth/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/auth/users/{id}").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(401);
+                            response.getWriter().write("Unauthorized");
+                        })
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .successHandler(oAuth2SuccessHandler))
+                        .successHandler(oAuth2SuccessHandler)
+                )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
     @Bean

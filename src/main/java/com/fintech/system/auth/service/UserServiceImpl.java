@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService{
                 .fName(request.getFName())
                 .lName(request.getLName())
                 .fullName(request.getFName() + " " + request.getLName())
+                .phoneNumber(request.getPhoneNumber())
                 .roles(Set.of(Role.ROLE_USER))
                 .emailVerified(false)
                 .softDelete(false)
