@@ -1,0 +1,7 @@
+package com.fintech.system.common.exception;
+
+public class InvalidRequestException extends RuntimeException {
+    public InvalidRequestException(String message){
+        super(message);
+    }
+}

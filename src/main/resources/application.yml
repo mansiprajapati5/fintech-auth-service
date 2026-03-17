@@ -1,0 +1,82 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: finditback-system
+
+  # MongoDB
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/lost_found
+
+  # Mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: etmanager2025@gmail.com
+    password: swfv khxb ahsf gtdm
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  # Thymeleaf
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 856767156589-urbcsa27rt9e486ubqsv2bm4kfg355ej.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - openid
+              - profile
+              - email
+
+  # OAuth2 (commented for now)
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: ${GOOGLE_CLIENT_ID}
+#            client-secret: ${GOOGLE_CLIENT_SECRET}
+#            scope:
+#              - openid
+#              - profile
+#              - email
+
+# App Custom Properties
+app:
+  base-url: http://localhost:8080
+  jwt:
+    secret: 7Rx9K2mP4nQ8vL1wX6yZ3bF5hJ0cA+dE/gNtSuViWoYTlMkHjCeIpOqUrBsD==
+    expiration: 86400000          # 1 day
+    refresh-expiration: 604800000 # 7 days
+
+# Swagger
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+# Logging
+logging:
+  level:
+    com.finditback: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

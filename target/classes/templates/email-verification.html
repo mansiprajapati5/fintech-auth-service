@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #1a73e8;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 24px;
+        }
+        .body {
+            padding: 40px 30px;
+            color: #333333;
+        }
+        .body p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 14px 32px;
+            background-color: #1a73e8;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999999;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid #eeeeee;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>FindItBack</h1>
+    </div>
+    <div class="body">
+        <p>Hi <strong th:text="${name}">User</strong>,</p>
+        <p>Thank you for registering with <strong>FindItBack</strong>. Please verify your email address to activate your account.</p>
+        <p>Click the button below to verify your email:</p>
+
+        <a th:href="${verificationUrl}" class="btn">Verify Email</a>
+
+        <hr class="divider"/>
+
+        <p>If the button doesn't work, copy and paste the link below into your browser:</p>
+        <p th:text="${verificationUrl}" style="word-break: break-all; color: #1a73e8;"></p>
+
+        <hr class="divider"/>
+
+        <p style="color: #999999; font-size: 14px;">
+            This link will expire in <strong>24 hours</strong>. If you did not create an account, you can safely ignore this email.
+        </p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2026 FindItBack. All rights reserved.</p>
+        <p>This is an automated email, please do not reply.</p>
+    </div>
+</div>
+</body>
+</html>
