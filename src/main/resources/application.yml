@@ -14,8 +14,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: etmanager2025@gmail.com
-    password: swfv khxb ahsf gtdm
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -29,39 +29,33 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
 
-
+  # OAuth2
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: 856767156589-urbcsa27rt9e486ubqsv2bm4kfg355ej.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
             scope:
               - openid
               - profile
               - email
 
-  # OAuth2 (commented for now)
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: ${GOOGLE_CLIENT_ID}
-#            client-secret: ${GOOGLE_CLIENT_SECRET}
-#            scope:
-#              - openid
-#              - profile
-#              - email
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
 
 # App Custom Properties
 app:
-  base-url: http://localhost:8080
+  base-url: http://localhost:8081
   jwt:
-    secret: 7Rx9K2mP4nQ8vL1wX6yZ3bF5hJ0cA+dE/gNtSuViWoYTlMkHjCeIpOqUrBsD==
-    expiration: 86400000          # 1 day
-    refresh-expiration: 604800000 # 7 days
+    secret: ${JWT_SECRET}
+    expiration: 86400000
+    refresh-expiration: 604800000
 
 # Swagger
 springdoc:
