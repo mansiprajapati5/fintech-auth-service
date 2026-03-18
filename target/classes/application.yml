@@ -72,6 +72,6 @@ springdoc:
 # Logging
 logging:
   level:
-    com.finditback: DEBUG
+    com.fintech: DEBUG
     org.springframework.security: DEBUG
     org.springframework.data.mongodb.core.MongoTemplate: DEBUG
